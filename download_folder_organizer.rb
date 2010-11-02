@@ -1,5 +1,3 @@
-# Used by mac folder actions
-
 class DownloadFolderOrganizer
   
     @@download_folder = "$HOME/Downloads"
