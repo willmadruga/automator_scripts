@@ -57,6 +57,9 @@ class DownloadFolderOrganizer
   end
 end
 
+# do the job
+
 d = DownloadFolderOrganizer::new
+sleep 10
 d.organize_files
 d.organize_folders_by_name
