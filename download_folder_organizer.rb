@@ -21,8 +21,15 @@ class DownloadFolderOrganizer
   ]
 
   @@pattern_map = Hash[
-    "(PSP)" => "PSP"
+    "(PSP)" => "games"
   ]
+
+  def initialize
+    notify('inicializado')
+    #sleep 15
+    organize(@@ext_map)
+    organize(@@pattern_map)
+  end
 
   def move(file, to)
     origin = "#{@@download_folder}/#{file}"
@@ -34,32 +41,22 @@ class DownloadFolderOrganizer
     `ls -a #{@@download_folder}`
   end
   
-  def organize_files
+  def organize(col)
     list_files.split("\n").each do |f|
-      @@ext_map.each do |ext,folder|
-        if f.match(ext)
-          move(f,folder)
-          `growlnotify -m "File #{f} moved to #{folder}"`
-        end
-      end
-    end
-  end
-  
-  def organize_folders_by_name
-    list_files.split("\n").each do |f|
-      @@pattern_map.each do |pattern,folder|
+      col.each do |pattern,folder|
         if f.match(pattern)
           move(f,folder)
-          `growlnotify -m "File #{f} moved to #{folder}"`
+          message = "File #{f} moved to #{folder}"
+          #notify(message)
         end
       end
     end
+    
+  end
+  
+  def notify(message)
+    `growlnotify -m #{message}`
   end
 end
 
-# do the job
-
-d = DownloadFolderOrganizer::new
-sleep 10
-d.organize_files
-d.organize_folders_by_name
+DownloadFolderOrganizer::new
