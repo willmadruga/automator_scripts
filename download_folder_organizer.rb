@@ -16,7 +16,8 @@ class DownloadFolderOrganizer
     ".sh" => "apps",
     ".tar.gz" => "zips",
     ".zip" => "zips",
-    ".dmg" => "apps"
+    ".dmg" => "apps",
+    ".txt" => "misc"
   ]
 
   @@pattern_map = Hash[
