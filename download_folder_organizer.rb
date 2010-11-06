@@ -6,6 +6,7 @@ class DownloadFolderOrganizer
     ".torrent" => "torrents",
     ".mov" => "movies",
     ".mp4" => "movies",
+    ".mkv" => "movies",    
     ".flv" => "movies",
     ".m4v" => "movies",
     ".avi" => "movies",
@@ -44,14 +45,13 @@ class DownloadFolderOrganizer
   def organize(col)
     list_files.split("\n").each do |f|
       col.each do |pattern,folder|
-        if f.match(pattern)
-          move(f,folder)
-          message = "File #{f} moved to #{folder}"
-          #notify(message)
+        if /#{pattern}$/.match(f)
+           move(f,folder)
+           message = "File #{f} moved to #{folder}"
+           notify(message)
         end
       end
     end
-    
   end
   
   def notify(message)
