@@ -2,7 +2,7 @@ class DownloadFolderOrganizer
 
   DOWNLOAD_FOLDER = "$HOME/Downloads"
 
-  @@ext_map = Hash[
+  EXTENSION = Hash[
     ".torrent" => "torrents",
     ".mov" => "movies",
     ".mp4" => "movies",
@@ -25,7 +25,7 @@ class DownloadFolderOrganizer
 
   def initialize
     sleep 15
-    organize(@@ext_map)
+    organize(EXTENSION)
   end
 
   def move(file, to)
