@@ -1,6 +1,6 @@
 class DownloadFolderOrganizer
 
-  @@download_folder = "$HOME/Downloads"
+  DOWNLOAD_FOLDER = "$HOME/Downloads"
 
   @@ext_map = Hash[
     ".torrent" => "torrents",
@@ -18,28 +18,24 @@ class DownloadFolderOrganizer
     ".tar.gz" => "zips",
     ".zip" => "zips",
     ".dmg" => "apps",
-    ".txt" => "misc"
+    ".txt" => "misc",
+    "(PSP)" => "games"    
   ]
 
-  @@pattern_map = Hash[
-    "(PSP)" => "games"
-  ]
 
   def initialize
-    notify('inicializado')
-    #sleep 15
+    sleep 15
     organize(@@ext_map)
-    organize(@@pattern_map)
   end
 
   def move(file, to)
-    origin = "#{@@download_folder}/#{file}"
-    destiny = "#{@@download_folder}/#{to}/"
+    origin = "#{DOWNLOAD_FOLDER}/#{file}"
+    destiny = "#{DOWNLOAD_FOLDER}/#{to}/"
     `mv \"#{origin}\" \"#{destiny}\"`
   end
 
   def list_files
-    `ls -a #{@@download_folder}`
+    `ls -a #{DOWNLOAD_FOLDER}`
   end
   
   def organize(col)
